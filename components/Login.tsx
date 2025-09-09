@@ -1,4 +1,5 @@
 
+
 import React, { useState } from 'react';
 import { useTranslation } from '../context/LanguageContext';
 import { ShieldCheckIcon, InformationCircleIcon } from '@heroicons/react/24/outline';
@@ -31,21 +32,21 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900 px-4">
+        <div className="flex items-center justify-center min-h-screen bg-slate-50 dark:bg-neutral-900 px-4">
             <div className="w-full max-w-md">
                 <div className="text-center mb-8">
                     <ShieldCheckIcon className="h-12 w-12 mx-auto text-blue-600 dark:text-blue-500" />
-                    <h1 className="text-3xl font-bold text-gray-800 dark:text-white mt-4">{t('app_title')}</h1>
-                    <p className="text-gray-600 dark:text-gray-400">{t('app_subtitle')}</p>
+                    <h1 className="text-3xl font-bold text-slate-800 dark:text-white mt-4">{t('app_title')}</h1>
+                    <p className="text-slate-600 dark:text-neutral-400">{t('app_subtitle')}</p>
                 </div>
 
-                <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 p-8">
-                    <h2 className="text-2xl font-semibold text-center text-gray-900 dark:text-white">{isLoginView ? t('welcome_back') : t('create_account')}</h2>
-                    <p className="text-center text-gray-500 dark:text-gray-400 text-sm mt-2">{isLoginView ? t('login_prompt') : t('signup_prompt')}</p>
+                <div className="bg-white dark:bg-neutral-800 rounded-xl shadow-lg border border-slate-200 dark:border-neutral-700 p-8">
+                    <h2 className="text-2xl font-semibold text-center text-slate-900 dark:text-white">{isLoginView ? t('welcome_back') : t('create_account')}</h2>
+                    <p className="text-center text-slate-500 dark:text-neutral-400 text-sm mt-2">{isLoginView ? t('login_prompt') : t('signup_prompt')}</p>
                     
                     <form onSubmit={handleSubmit} className="mt-8 space-y-6">
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">{t('email')}</label>
+                            <label htmlFor="email" className="block text-sm font-medium text-slate-700 dark:text-neutral-300">{t('email')}</label>
                             <input
                                 id="email"
                                 name="email"
@@ -54,11 +55,11 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="mt-1 block w-full px-4 py-3 rounded-lg border-gray-300 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                                className="mt-1 block w-full px-4 py-3 rounded-lg border-slate-300 bg-slate-50 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                             />
                         </div>
                         <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">{t('password')}</label>
+                            <label htmlFor="password" className="block text-sm font-medium text-slate-700 dark:text-neutral-300">{t('password')}</label>
                             <input
                                 id="password"
                                 name="password"
@@ -67,7 +68,7 @@ const Login: React.FC<LoginProps> = ({ handleLogin }) => {
                                 required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="mt-1 block w-full px-4 py-3 rounded-lg border-gray-300 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                                className="mt-1 block w-full px-4 py-3 rounded-lg border-slate-300 bg-slate-50 dark:bg-neutral-700 dark:border-neutral-600 dark:text-neutral-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                             />
                         </div>
                         {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}

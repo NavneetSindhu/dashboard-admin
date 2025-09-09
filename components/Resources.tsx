@@ -34,13 +34,13 @@ const resourcesConfig = [
 
 
 const ResourceCard: React.FC<{title: string; description: string; link: string}> = ({ title, description, link }) => (
-    <a href={link} target="_blank" rel="noopener noreferrer" className="block p-4 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all group">
+    <a href={link} target="_blank" rel="noopener noreferrer" className="block p-4 rounded-lg bg-slate-100 dark:bg-neutral-700 hover:bg-slate-200 dark:hover:bg-neutral-600 transition-all group">
         <div className="flex justify-between items-center">
             <div>
-                <p className="font-semibold text-gray-800 dark:text-gray-200">{title}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
+                <p className="font-semibold text-slate-800 dark:text-neutral-200">{title}</p>
+                <p className="text-sm text-slate-600 dark:text-neutral-400">{description}</p>
             </div>
-            <ArrowTopRightOnSquareIcon className="h-5 w-5 text-gray-400 dark:text-gray-500 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
+            <ArrowTopRightOnSquareIcon className="h-5 w-5 text-slate-400 dark:text-neutral-500 group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
         </div>
     </a>
 )
@@ -51,14 +51,14 @@ const Resources: React.FC = () => {
     return (
         <div className="space-y-8">
             <div>
-                <h1 className="text-3xl font-bold text-gray-800 dark:text-white">{t('resources_title_long')}</h1>
-                <p className="text-gray-600 dark:text-gray-400 mt-1">{t('resources_desc')}</p>
+                <h1 className="text-3xl font-bold text-slate-800 dark:text-white">{t('resources_title_long')}</h1>
+                <p className="text-slate-600 dark:text-neutral-400 mt-1">{t('resources_desc')}</p>
             </div>
 
             <div className="space-y-8">
                 {resourcesConfig.map(({ categoryKey, icon: Icon, itemKeys }) => (
-                     <div key={categoryKey} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
-                         <h2 className="text-xl font-semibold text-gray-900 dark:text-white flex items-center mb-4">
+                     <div key={categoryKey} className="bg-white dark:bg-neutral-800 p-6 rounded-xl shadow-sm border border-slate-200 dark:border-neutral-700">
+                         <h2 className="text-xl font-semibold text-slate-900 dark:text-white flex items-center mb-4">
                             <Icon className="h-6 w-6 mr-3 text-blue-600 dark:text-blue-500" />
                             {t(categoryKey)}
                          </h2>

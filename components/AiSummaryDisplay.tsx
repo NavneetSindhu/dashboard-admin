@@ -67,20 +67,20 @@ const AiSummaryDisplay: React.FC<AiSummaryDisplayProps> = ({ summary }) => {
     return (
         <div className="ai-summary-container">
             <div 
-                className="prose prose-sm max-w-none text-gray-700 dark:text-gray-300 leading-relaxed dark:[&>h2]:text-white dark:[&>h3]:text-gray-200"
+                className="prose prose-sm max-w-none text-slate-700 dark:text-neutral-300 leading-relaxed dark:[&>h2]:text-white dark:[&>h3]:text-neutral-200"
                 dangerouslySetInnerHTML={{ __html: parseMarkdown(summary) }}
             />
-            <div className="flex items-center gap-3 mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="flex items-center gap-3 mt-6 pt-4 border-t border-slate-200 dark:border-neutral-700">
                 <button
                     onClick={handleCopyToClipboard}
-                    className="flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 transition-colors"
+                    className="flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg bg-slate-200 hover:bg-slate-300 dark:bg-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-600 transition-colors"
                 >
                     <DocumentDuplicateIcon className="h-5 w-5" />
                     {copyButtonText}
                 </button>
                 <button
                     onClick={handleExportToPdf}
-                    className="flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600 transition-colors"
+                    className="flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg bg-slate-200 hover:bg-slate-300 dark:bg-neutral-700 dark:text-neutral-200 dark:hover:bg-neutral-600 transition-colors"
                 >
                     <ArrowDownTrayIcon className="h-5 w-5" />
                     {t('export_pdf')}

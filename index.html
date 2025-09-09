@@ -7,6 +7,11 @@
     <title>Smart Health Surveillance Dashboard</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
      crossorigin=""/>
@@ -30,9 +35,11 @@
 <script>
     (function() {
         try {
-            // Only set dark mode if it's explicitly stored as 'dark'. Default to light.
-            if (localStorage.getItem('theme') === 'dark') {
+            // Set theme based on localStorage or system preference to prevent FOUC
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
                 document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
             }
         } catch (_) {}
     })();
@@ -41,31 +48,28 @@
     body {
         font-family: 'Inter', sans-serif;
     }
-    /* Leaflet dark mode tiles */
+    /* Leaflet map styling */
     .leaflet-tile-pane {
         -webkit-filter: invert(0) brightness(1);
         filter: invert(0) brightness(1);
     }
-    .dark .leaflet-tile-pane {
-        -webkit-filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9);
-        filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(0.9);
-    }
+    /* The CSS filter that inverts the map tiles in dark mode has been removed. */
     .recharts-cartesian-grid-line {
-        stroke: #e5e7eb; /* gray-200 */
+        stroke: #e2e8f0; /* slate-200 */
     }
     .dark .recharts-cartesian-grid-line {
-        stroke: #4b5563; /* gray-600 */
+        stroke: #525252; /* neutral-600 */
     }
     .recharts-text {
-        fill: #6b7280; /* gray-500 */
+        fill: #64748b; /* slate-500 */
     }
     .dark .recharts-text {
-        fill: #9ca3af; /* gray-400 */
+        fill: #a3a3a3; /* neutral-400 */
     }
 </style>
 <link rel="stylesheet" href="/index.css">
 </head>
-<body class="bg-gray-50 dark:bg-gray-900">
+<body class="bg-slate-50 dark:bg-neutral-900">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
 </body>

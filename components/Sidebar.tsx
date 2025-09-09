@@ -36,7 +36,7 @@ const navigation = [
 // FIX: Corrected the type for the 'item' prop to accept any item from the navigation array, not just the first one.
 const NavItem: React.FC<{ item: (typeof navigation)[number], isActive: boolean }> = ({ item, isActive }) => {
     const Icon = isActive ? item.solid : item.outline;
-    return <Icon className={`h-6 w-6 transition-colors ${isActive ? 'text-blue-600 dark:text-blue-500' : 'text-gray-600 dark:text-gray-400 group-hover/item:text-gray-900 dark:group-hover/item:text-gray-100'}`} />;
+    return <Icon className={`h-6 w-6 transition-colors ${isActive ? 'text-blue-600 dark:text-blue-500' : 'text-slate-600 dark:text-neutral-400 group-hover/item:text-slate-900 dark:group-hover/item:text-neutral-100'}`} />;
 };
 
 const Sidebar: React.FC = () => {
@@ -44,21 +44,21 @@ const Sidebar: React.FC = () => {
 
     return (
         <nav className="fixed left-4 top-1/2 -translate-y-1/2 z-[2000] group">
-            <div className="flex flex-col gap-2 rounded-xl border border-gray-200 bg-white p-2 shadow-lg transition-all duration-300 ease-in-out dark:bg-gray-800 dark:border-gray-700">
+            <div className="flex flex-col gap-2 rounded-xl border border-slate-200 bg-white p-2 shadow-lg transition-all duration-300 ease-in-out dark:bg-neutral-800 dark:border-neutral-700">
                 {navigation.map((item) => (
                     <NavLink
                         key={item.name}
                         to={item.href}
                         className={({ isActive }) =>
                             `group/item flex cursor-pointer items-center justify-center group-hover:justify-start gap-3 rounded-lg p-3 transition-colors ${
-                                isActive ? 'bg-blue-50 dark:bg-blue-900/50' : 'hover:bg-gray-100 dark:hover:bg-gray-700'
+                                isActive ? 'bg-blue-50 dark:bg-blue-900/50' : 'hover:bg-slate-100 dark:hover:bg-neutral-700'
                             }`
                         }
                     >
                         {({ isActive }) => (
                             <>
                                 <NavItem item={item} isActive={isActive} />
-                                <p className="w-0 overflow-hidden whitespace-nowrap text-sm font-medium leading-normal text-gray-800 dark:text-gray-200 opacity-0 transition-all duration-300 ease-in-out group-hover:w-40 group-hover:opacity-100">
+                                <p className="w-0 overflow-hidden whitespace-nowrap text-sm font-medium leading-normal text-slate-800 dark:text-neutral-200 opacity-0 transition-all duration-300 ease-in-out group-hover:w-40 group-hover:opacity-100">
                                     {t(item.name)}
                                 </p>
                             </>

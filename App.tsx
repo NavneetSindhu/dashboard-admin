@@ -1,8 +1,5 @@
-
-
-// FIX: Corrected React import to properly include useState and useEffect hooks.
 import React, { useState, useEffect } from 'react';
-import { HashRouter, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { HashRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
@@ -18,16 +15,9 @@ import NotificationManager from './components/NotificationManager';
 
 type Theme = 'light' | 'dark';
 
-const getInitialTheme = (): Theme => {
-    if (typeof window !== 'undefined' && localStorage.getItem('theme') === 'dark') {
-        return 'dark';
-    }
-    return 'light';
-};
-
 const ProtectedLayout: React.FC<{ children: React.ReactNode; currentTheme: Theme; toggleTheme: () => void; handleLogout: () => void; }> = ({ children, currentTheme, toggleTheme, handleLogout }) => {
     return (
-        <div className="flex min-h-screen bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+        <div className="flex min-h-screen bg-slate-50 text-slate-800 dark:bg-neutral-900 dark:text-neutral-200">
             <Sidebar />
             <div className="flex-1 flex flex-col w-full">
                 <Header currentTheme={currentTheme} toggleTheme={toggleTheme} handleLogout={handleLogout} />
@@ -43,23 +33,50 @@ const ProtectedLayout: React.FC<{ children: React.ReactNode; currentTheme: Theme
 };
 
 const App: React.FC = () => {
-    const [theme, setTheme] = useState<Theme>(getInitialTheme);
+    const [theme, setTheme] = useState<Theme>(() => {
+        const storedTheme = localStorage.getItem('theme');
+        // This is the correct way to get the initial theme.
+        if (storedTheme === 'light' || storedTheme === 'dark') {
+            return storedTheme;
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    });
+
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
         return localStorage.getItem('isAuthenticated') === 'true';
     });
 
+    // EFFECT 1: This effect applies the theme class to the <html> element.
     useEffect(() => {
-        if (theme === 'dark') {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-        }
+        document.documentElement.classList.toggle('dark', theme === 'dark');
     }, [theme]);
+    
+    // EFFECT 2: This effect listens for system theme changes and applies the theme only if a manual choice hasn't been made.
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        const handleChange = (e: MediaQueryListEvent) => {
+            // Only update the theme if the user hasn't made a manual choice.
+            if (!localStorage.getItem('theme')) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        };
+
+        mediaQuery.addEventListener('change', handleChange);
+
+        return () => {
+            mediaQuery.removeEventListener('change', handleChange);
+        };
+    }, []); // Empty dependency array ensures this effect runs only once on mount.
+
 
     const toggleTheme = () => {
-        setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+        setTheme(prevTheme => {
+            const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+            // Always persist the user's choice to localStorage.
+            localStorage.setItem('theme', newTheme);
+            return newTheme;
+        });
     };
 
     const handleLogin = () => {
@@ -71,7 +88,6 @@ const App: React.FC = () => {
         localStorage.removeItem('isAuthenticated');
         setIsAuthenticated(false);
     };
-
 
     return (
         <LanguageProvider>
@@ -90,7 +106,7 @@ const App: React.FC = () => {
                                             <Route path="/disease-trends" element={<DiseaseTrends />} />
                                             <Route path="/water-quality" element={<WaterQuality />} />
                                             <Route path="/community-reports" element={<CommunityReports currentTheme={theme} />} />
-                                            <Route path="/interventions" element={<div className="text-center p-12 bg-white dark:bg-gray-800 rounded-xl">Interventions Page - Content to be added.</div>} />
+                                            <Route path="/interventions" element={<div className="text-center p-12 bg-white dark:bg-neutral-800 rounded-xl">Interventions Page - Content to be added.</div>} />
                                             <Route path="/resources" element={<Resources />} />
                                             <Route path="/settings" element={<Settings handleLogout={handleLogout} />} />
                                             <Route path="*" element={<Navigate to="/dashboard" replace />} />
