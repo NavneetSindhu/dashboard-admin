@@ -1,0 +1,5 @@
+{
+  "name": "Smart Health Surveillance Dashboard",
+  "description": "An AI-powered dashboard for public health surveillance, enabling analysis of disease trends, water quality, and community health reports to generate actionable insights.",
+  "requestFramePermissions": []
+}
